@@ -1,0 +1,28 @@
+{
+  "name": "mithril-starter-kit",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pro": "webpack --mode production",
+    "dev": "webpack --mode development --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mojowork/mithril-starter-kit.git"
+  },
+  "keywords": [],
+  "author": "chaos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mojowork/mithril-starter-kit/issues"
+  },
+  "homepage": "https://github.com/mojowork/mithril-starter-kit#readme",
+  "dependencies": {
+    "mithril": "^1.1.6"
+  },
+  "devDependencies": {
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2"
+  }
+}
