@@ -16,21 +16,73 @@ npm install -D babel-loader @babel/core @babel/preset-env (babel)
 }
 
 npm install -D style-loader css-loader postcss-loader autoprefixer  cssnano less less-loader  (less)
-// postcss-loader 
 {
-    loader: "postcss-loader", 
-    options: {
-      ident: 'postcss',
-      plugins: (loader) => [
-        require('autoprefixer')(),
-        require('cssnano')()
-      ]
-    }
+    test: /\.(c|le)ss$/,
+    use: [
+        {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it uses publicPath in webpackOptions.output
+              hmr: process.env.NODE_ENV === 'development',
+            },
+        },
+        {
+            loader: 'css-loader'
+        },
+        {
+            loader: 'postcss-loader',
+            options: {
+                ident: 'postcss',
+                plugins: (loader) => [
+                  require('autoprefixer')(),
+                //   require('cssnano')()
+                ]
+              }
+        },
+        {
+            loader: 'less-loader'
+        }
+    ]
 }
 
-npm install -D url-loader image-loader (images)
+npm install -D url-loader file-loader (images/font)
 
-npm install -D html-webpack-plugin (plugins)
+{
+    test: /\.(png|gif|jpe?g)$/i,
+    use: [{
+        loader: 'url-loader',
+        options: {
+            name: '[name]-[hash:7].[ext]',
+            limit: 8192,
+            outputPath: 'assets/images'
+        }
+    }]
+
+},
+{
+    test: /\.(eot|svg|ttf|woff2?)$/,
+    use: [{
+        loader: 'file-loader',
+        options: {
+            name: '[name]-[hash:7].[ext]',
+            outputPath: 'assets/fonts'
+        }
+    }]
+
+},
+
+npm install -D html-webpack-plugin clean-webpack-plugin mini-css-extract-plugin (plugins)
+
+  new HtmlWebpackPlugin({
+      template: 'index.html',
+      filename: 'index.html'
+  }),
+  new CleanWebpackPlugin(),
+
+  new MiniCssExtractPlugin({
+      filename: '[name]-[hash:7].css',
+  }),
 
 ```
 ## Target Browsers
