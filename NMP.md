@@ -84,6 +84,8 @@ npm install -D html-webpack-plugin clean-webpack-plugin mini-css-extract-plugin 
       filename: '[name]-[hash:7].css',
   }),
 
+  npm install -D uglifyjs-webpack-plugin purifycss-webpack purify-css glob( tree-shaking )
+
 ```
 ## Target Browsers
 ```
@@ -95,3 +97,4 @@ package.json
 ]
 
 ```
+

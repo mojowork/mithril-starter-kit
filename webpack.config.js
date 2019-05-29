@@ -1,10 +1,13 @@
 const path = require('path')
+const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// tree-shaking
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const PurifyCSSPlugin = require('purifycss-webpack')
 
 module.exports = {
-    mode: 'none',
 
     entry: {
         app: './src/app.js'
@@ -18,7 +21,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /.\jsx?$/,
+                test: /\.jsx?$/,
                 use: [
                 {
                     loader: 'babel-loader',
@@ -81,6 +84,7 @@ module.exports = {
             }
         ]
     },
+
     plugins: [
         new HtmlWebpackPlugin({
             template: 'index.html',
@@ -91,5 +95,23 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: '[name]-[hash:7].css',
         }),
-    ]
+        new PurifyCSSPlugin({
+            // Give paths to parse for rules. These should be absolute!
+            paths: glob.sync(path.join(__dirname, 'index.html')),
+        })
+    ],
+    // tree-shaking
+    optimization: { 
+        minimizer: [new UglifyJsPlugin()],
+    },
+
+    devServer: {
+        open: true,
+        hot: true,
+        port: 8080,
+        proxy: {
+            '/api': "http://mojo.work/api",
+            changeOrigin: true
+        }
+    },
 }

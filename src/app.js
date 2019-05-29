@@ -1,7 +1,5 @@
-import './style.scss';
+import './style.less';
+import { a, b, c} from './func';
 
-const arr = () => {
-  console.log('arr');
-}
-
-arr();
+// a()
+b()
