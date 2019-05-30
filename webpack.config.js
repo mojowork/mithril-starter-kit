@@ -1,5 +1,6 @@
 const path = require('path')
 const glob = require('glob');
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -10,7 +11,7 @@ const PurifyCSSPlugin = require('purifycss-webpack')
 module.exports = {
 
     entry: {
-        app: './src/app.js'
+        index: './src/index.js'
     },
 
     output: {
@@ -26,7 +27,12 @@ module.exports = {
                 {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
+                        presets: ['@babel/preset-env'],
+                        plugins: [
+                            ['transform-react-jsx', {
+                                'pragma': 'm',
+                            }],
+                        ],
                     }
                 }]
             },
@@ -65,7 +71,8 @@ module.exports = {
                         },
                     },
                     {
-                        loader: 'css-loader'
+                        loader: 'css-loader',
+                        options: { sourceMap: true },
                     },
                     {
                         loader: 'postcss-loader',
@@ -78,7 +85,8 @@ module.exports = {
                           }
                     },
                     {
-                        loader: 'less-loader'
+                        loader: 'less-loader',
+                        options: { sourceMap: true },
                     }
                 ]
             }
@@ -90,6 +98,9 @@ module.exports = {
             template: 'index.html',
             filename: 'index.html'
         }),
+        new webpack.ProvidePlugin({
+            m: 'mithril', //Global access
+        }),
         new CleanWebpackPlugin(),
 
         new MiniCssExtractPlugin({
@@ -97,7 +108,7 @@ module.exports = {
         }),
         new PurifyCSSPlugin({
             // Give paths to parse for rules. These should be absolute!
-            paths: glob.sync(path.join(__dirname, 'index.html')),
+            paths: glob.sync(path.join(__dirname, './src/views/*.js')),
         })
     ],
     // tree-shaking
