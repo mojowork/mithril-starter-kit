@@ -1,12 +1,9 @@
- // pages here
-import index from '../views/home'
-import Pagea from '../views/pagea'
-import Pageb from '../views/pageb'
+ // Pages here
+import App from '../views/app'
 
+ // Routes here
 const Routes = {
-  '/index': index,
-  '/pagea': Pagea,
-  '/pageb': Pageb
+  '/index': App
 };
 
 const DefaultRoute = '/index';

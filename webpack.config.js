@@ -37,37 +37,37 @@ module.exports = {
                 }]
             },
             {
-                test: /\.(png|gif|jpe?g)$/i,
+                test: /\.(png|gif|jpe?g|svg)$/i,
                 use: [{
                     loader: 'url-loader',
                     options: {
-                        name: '[name]-[hash:7].[ext]',
+                        name: '[name].[ext]?[hash:7]',
                         limit: 8192,
-                        outputPath: 'assets/images'
+                        outputPath: 'assets/'
                     }
                 }]
             
             },
-            {
-                test: /\.(eot|svg|ttf|woff2?)$/,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        name: '[name]-[hash:7].[ext]',
-                        outputPath: 'assets/fonts'
-                    }
-                }]
+            // {
+            //     test: /\.(eot|svg|ttf|woff2?)$/,
+            //     use: [{
+            //         loader: 'file-loader',
+            //         options: {
+            //             name: '[name]-[hash:7].[ext]',
+            //             outputPath: 'assets/fonts'
+            //         }
+            //     }]
             
-            },
+            // },
             {
-                test: /\.(c|le)ss$/,
+                test: /\.less$/,
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
                           // you can specify a publicPath here
                           // by default it uses publicPath in webpackOptions.output
-                          hmr: process.env.NODE_ENV === 'development',
+                            hmr: process.env.NODE_ENV !== 'production',
                         },
                     },
                     {
@@ -109,7 +109,7 @@ module.exports = {
         new PurifyCSSPlugin({
             // Give paths to parse for rules. These should be absolute!
             paths: glob.sync(path.join(__dirname, './src/views/*.js')),
-        })
+        }),
     ],
     // tree-shaking
     optimization: { 
@@ -125,4 +125,10 @@ module.exports = {
             changeOrigin: true
         }
     },
+}
+
+if (process.env.NODE_ENV === 'production') {
+    module.exports.plugins = (module.exports.plugins || []).concat([
+        // Plugins More for production
+    ])
 }

@@ -47,6 +47,8 @@
     "webpack-dev-server": "^3.4.1"
   },
   "browserslist": [
-    "last 2 versions"
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
   ]
 }
