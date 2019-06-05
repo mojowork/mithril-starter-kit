@@ -1,5 +1,5 @@
 
-let App = {
+const App = {
 	view: () => (
 	<main>
 			<img src={require('../assets/logo.png')}/>
