@@ -1,17 +1,21 @@
 {
   "name": "mithril-starter-kit",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.1.0",
+  "description": "A boilerplate Mithril application With Webpack",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --progress --config webpack.pro.js",
+    "build": "webpack --config webpack.pro.js --progress",
     "dev": "webpack-dev-server --config webpack.dev.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mojowork/mithril-starter-kit.git"
   },
-  "keywords": [],
+  "keywords": [
+    "mithril",
+    "Webpack",
+    "boilerplate"
+  ],
   "author": "chaos",
   "license": "ISC",
   "bugs": {
@@ -32,11 +36,12 @@
     "css-loader": "^2.1.1",
     "cssnano": "^4.1.10",
     "file-loader": "^3.0.1",
-    "glob": "^7.1.4",
+    "glob-all": "^3.1.0",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.6.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
     "purify-css": "^1.2.5",
     "purifycss-webpack": "^0.7.0",

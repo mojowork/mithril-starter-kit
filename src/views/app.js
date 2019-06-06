@@ -1,11 +1,10 @@
-
 const App = {
-	view: () => (
-	<main>
-			<img src={require('../assets/logo.png')}/>
-			<h1>Hello Mithril</h1>
-	</main>
-	)
-}
+  view: () =>
+    m(
+      "main",
+      m("img", { src: require("../assets/logo.png") }),
+      m("h1", "Hello Mithril ")
+    )
+};
 
-export default App
+export default App;
