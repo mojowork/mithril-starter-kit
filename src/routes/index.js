@@ -1,11 +1,11 @@
- // Pages here
+// Pages here
 import App from '../views/app'
 
- // Routes here
+// Routes here
 const Routes = {
-  '/index': App
+    '/': App
 };
 
-const DefaultRoute = '/index';
+const DefaultRoute = '/';
 
 export { Routes, DefaultRoute }
